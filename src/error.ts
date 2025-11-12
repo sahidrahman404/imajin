@@ -1,11 +1,11 @@
 import type { ContentfulStatusCode } from 'hono/utils/http-status';
 
 export class AppError extends Error {
-  statusCode: ContentfulStatusCode;
+  status: ContentfulStatusCode;
 
   constructor(message: string, statusCode: ContentfulStatusCode, name?: string) {
     super(message);
-    this.statusCode = statusCode;
+    this.status = statusCode;
     this.name = name ?? 'AppError';
     Object.setPrototypeOf(this, new.target.prototype);
   }

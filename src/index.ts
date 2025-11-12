@@ -25,12 +25,11 @@ app.use(async (_, next) => {
 });
 
 app.onError((err, c) => {
-  if (err instanceof HTTPException) {
+  if (err instanceof HTTPException || err instanceof AppError) {
     return c.json(
       {
         success: false,
         message: err.message,
-        status: 'error',
       },
       err.status
     );
@@ -48,16 +47,6 @@ app.onError((err, c) => {
         ],
       },
       409
-    );
-  }
-
-  if (err instanceof AppError) {
-    return c.json(
-      {
-        success: false,
-        message: err.message,
-      },
-      err.statusCode
     );
   }
 

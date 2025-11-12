@@ -2,17 +2,65 @@ import { Hono } from 'hono';
 import { z } from 'zod';
 import { login, register } from '@/src/auth/auth.service.js';
 import { deleteCookie, setCookie } from 'hono/cookie';
-import { validator } from 'hono-openapi';
+import { describeRoute, resolver, validator } from 'hono-openapi';
 import { db } from '@/src/database.js';
 import { config } from '@/src/config.js';
 import { authMiddleware } from '@/src/auth/auth.middleware.js';
 import type { Variables } from '@/src/auth/variable.js';
 import { deleteSessionsByUser } from '@/src/auth/session.service.js';
+import { badRequestResponseSchema, appErrorResponseSchema } from '@/src/api-schema.js';
 
 export const auth = new Hono<{ Variables: Variables }>().basePath('');
 
 auth.post(
   '/users',
+  describeRoute({
+    responses: {
+      200: {
+        description: 'successful response',
+        content: {
+          'application/json': {
+            schema: resolver(
+              z.object({
+                success: z.boolean(),
+                data: z.object({
+                  user: z.object({
+                    id: z.number(),
+                    email: z.string(),
+                    createdAt: z.string(),
+                  }),
+                }),
+              })
+            ),
+          },
+        },
+      },
+      400: {
+        description: 'bad request response',
+        content: {
+          'application/json': {
+            schema: resolver(badRequestResponseSchema),
+          },
+        },
+      },
+      409: {
+        description: 'email conflict response',
+        content: {
+          'application/json': {
+            schema: resolver(badRequestResponseSchema),
+          },
+        },
+      },
+      500: {
+        description: 'internal server error response',
+        content: {
+          'application/json': {
+            schema: resolver(appErrorResponseSchema),
+          },
+        },
+      },
+    },
+  }),
   validator(
     'json',
     z.object({
@@ -27,7 +75,7 @@ auth.post(
 
     setCookie(c, config.sessionCookieName, sessionId, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      secure: config.nodeEnv === 'production',
       sameSite: 'Strict',
       maxAge: 86400,
       path: '/',
@@ -45,6 +93,53 @@ auth.post(
 
 auth.post(
   'auth/users/session',
+  describeRoute({
+    responses: {
+      200: {
+        description: 'successful response',
+        content: {
+          'application/json': {
+            schema: resolver(
+              z.object({
+                success: z.boolean(),
+                data: z.object({
+                  user: z.object({
+                    id: z.number(),
+                    email: z.string(),
+                    createdAt: z.string(),
+                  }),
+                }),
+              })
+            ),
+          },
+        },
+      },
+      400: {
+        description: 'bad request response',
+        content: {
+          'application/json': {
+            schema: resolver(badRequestResponseSchema),
+          },
+        },
+      },
+      401: {
+        description: 'invalid credential response',
+        content: {
+          'application/json': {
+            schema: resolver(appErrorResponseSchema),
+          },
+        },
+      },
+      500: {
+        description: 'internal server error response',
+        content: {
+          'application/json': {
+            schema: resolver(appErrorResponseSchema),
+          },
+        },
+      },
+    },
+  }),
   validator(
     'json',
     z.object({
@@ -59,7 +154,7 @@ auth.post(
 
     setCookie(c, config.sessionCookieName, sessionId, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      secure: config.nodeEnv === 'production',
       sameSite: 'Strict',
       maxAge: 86400,
       path: '/',
@@ -75,24 +170,40 @@ auth.post(
   }
 );
 
-auth.delete('auth/users/session', authMiddleware, async (c) => {
-  const user = c.get('user');
-  await deleteSessionsByUser(user, db.em);
-  deleteCookie(c, config.sessionCookieName);
-
-  return c.success({
-    message: 'Logged out successfully',
-  });
-});
-
-auth.get('auth/users', authMiddleware, async (c) => {
-  const user = c.get('user');
-
-  return c.success({
-    user: {
-      id: user.id,
-      email: user.email,
-      createdAt: user.createdAt,
+auth.delete(
+  'auth/users/session',
+  describeRoute({
+    responses: {
+      200: {
+        description: 'successful response',
+        content: {
+          'application/json': {
+            schema: resolver(
+              z.object({
+                message: z.string(),
+              })
+            ),
+          },
+        },
+      },
+      500: {
+        description: 'internal server error response',
+        content: {
+          'application/json': {
+            schema: resolver(appErrorResponseSchema),
+          },
+        },
+      },
     },
-  });
-});
+  }),
+  authMiddleware,
+  async (c) => {
+    const user = c.get('user');
+    await deleteSessionsByUser(user, db.em);
+    deleteCookie(c, config.sessionCookieName);
+
+    return c.success({
+      message: 'Logged out successfully',
+    });
+  }
+);

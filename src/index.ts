@@ -9,6 +9,8 @@ import { product } from '@/src/product/product.controller.js';
 import { category } from '@/src/category/category.controller.js';
 import { cart } from '@/src/cart/cart.controller.js';
 import { order } from '@/src/order/order.controller.js';
+import { openAPIRouteHandler } from 'hono-openapi';
+import { Scalar } from '@scalar/hono-api-reference';
 import { cors } from 'hono/cors';
 import { config } from '@/src/config.js';
 
@@ -87,6 +89,28 @@ app.route('/', order);
 app.get('/health-check', (c) => {
   return c.success({ greeting: 'Healthy' });
 });
+
+app.get(
+  '/openapi.json',
+  openAPIRouteHandler(app, {
+    documentation: {
+      info: {
+        title: 'Hono',
+        version: '1.0.0',
+        description: 'Imajin Marketplace API',
+      },
+      servers: [{ url: 'http://localhost:3000', description: 'Local Server' }],
+    },
+  })
+);
+
+app.get(
+  '/docs',
+  Scalar({
+    theme: 'saturn',
+    url: '/api/v1/openapi.json',
+  })
+);
 
 const server = serve(
   {

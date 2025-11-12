@@ -1,16 +1,60 @@
 import { Hono } from 'hono';
 import type { Variables } from '@/src/auth/variable.js';
-import { validator } from 'hono-openapi';
+import { describeRoute, resolver, validator } from 'hono-openapi';
 import { z } from 'zod';
-import { authMiddleware } from '@/src/auth/auth.middleware.js';
 import { searchProducts } from '@/src/product/product.service.js';
 import { db } from '@/src/database.js';
+import { appErrorResponseSchema } from '@/src/api-schema.js';
 
 export const product = new Hono<{ Variables: Variables }>().basePath('/products');
 
 product.get(
   '/',
-  authMiddleware,
+  describeRoute({
+    responses: {
+      200: {
+        description: 'successful response',
+        content: {
+          'application/json': {
+            schema: resolver(
+              z.object({
+                success: z.boolean(),
+                data: z.object({
+                  products: z.array(
+                    z.object({
+                      id: z.number(),
+                      name: z.string(),
+                      description: z.string(),
+                      price: z.number(),
+                      category: z.object({
+                        id: z.number(),
+                        name: z.string(),
+                        description: z.string(),
+                        createdAt: z.string(),
+                      }),
+                      createdAt: z.string(),
+                      updatedAt: z.string(),
+                    })
+                  ),
+                  total: z.number(),
+                  page: z.number(),
+                  totalPages: z.number(),
+                }),
+              })
+            ),
+          },
+        },
+      },
+      500: {
+        description: 'internal server error response',
+        content: {
+          'application/json': {
+            schema: resolver(appErrorResponseSchema),
+          },
+        },
+      },
+    },
+  }),
   validator(
     'query',
     z.object({
@@ -38,6 +82,6 @@ product.get(
   async (c) => {
     const body = c.req.valid('query');
     const products = await searchProducts(body, db.em);
-    return c.json({ products });
+    return c.success(products);
   }
 );

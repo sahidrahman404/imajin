@@ -20,6 +20,7 @@
     "@hono/node-server": "^1.19.6",
     "@hono/standard-validator": "^0.1.5",
     "@mikro-orm/better-sqlite": "^6.5.9",
+    "@mikro-orm/cli": "6.5.9",
     "@mikro-orm/core": "^6.5.9",
     "@mikro-orm/migrations": "^6.5.9",
     "@mikro-orm/reflection": "^6.5.9",
@@ -28,14 +29,13 @@
     "@scalar/hono-api-reference": "^0.9.24",
     "hono": "^4.10.4",
     "hono-openapi": "^1.1.1",
+    "ts-node": "^10.9.2",
     "zod": "^4.1.12"
   },
   "devDependencies": {
     "@flydotio/dockerfile": "^0.7.10",
-    "@mikro-orm/cli": "^6.5.9",
     "@types/node": "^20.11.17",
     "prettier": "^3.6.2",
-    "ts-node": "^10.9.2",
     "tsx": "^4.7.1",
     "typescript": "^5.8.3",
     "vitest": "^4.0.8"

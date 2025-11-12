@@ -9,8 +9,18 @@ import { product } from '@/src/product/product.controller.js';
 import { category } from '@/src/category/category.controller.js';
 import { cart } from '@/src/cart/cart.controller.js';
 import { order } from '@/src/order/order.controller.js';
+import { cors } from 'hono/cors';
+import { config } from '@/src/config.js';
 
 const app = new Hono().basePath('/api/v1');
+
+app.use(
+  '*',
+  cors({
+    origin: config.frontendUrl,
+    credentials: true,
+  })
+);
 
 declare module 'hono' {
   interface Context {

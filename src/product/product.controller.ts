@@ -1,10 +1,10 @@
 import { Hono } from 'hono';
-import type { Variables } from '@/src/auth/variable.js';
+import type { Variables } from '../auth/variable.js';
 import { describeRoute, resolver, validator } from 'hono-openapi';
 import { z } from 'zod';
-import { searchProducts } from '@/src/product/product.service.js';
-import { db } from '@/src/database.js';
-import { appErrorResponseSchema } from '@/src/api-schema.js';
+import { searchProducts } from './product.service.js';
+import { db } from '../database.js';
+import { appErrorResponseSchema } from '../api-schema.js';
 
 export const product = new Hono<{ Variables: Variables }>().basePath('/products');
 

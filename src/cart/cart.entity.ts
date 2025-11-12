@@ -1,8 +1,8 @@
 import { Entity, PrimaryKey, Property, ManyToOne, OneToMany, Collection } from '@mikro-orm/core';
-import { type User } from '../../src/auth/user.entity.js';
-import { type CartItem } from '../../src/cart/cart-item.entity.js';
-import { User as UserEntity } from '../../src/auth/user.entity.js';
-import { CartItem as CartItemEntity } from '../../src/cart/cart-item.entity.js';
+import { type User } from '../auth/user.entity.js';
+import { type CartItem } from './cart-item.entity.js';
+import { User as UserEntity } from '../auth/user.entity.js';
+import { CartItem as CartItemEntity } from './cart-item.entity.js';
 
 @Entity()
 export class Cart {

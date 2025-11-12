@@ -11,8 +11,8 @@ import {
   removeFromCart,
   clearCart,
 } from './cart.service.js';
-import { appErrorResponseSchema } from '@/src/api-schema.js';
-import { successCartResponseSchema } from '@/src/cart/cart.schema.js';
+import { appErrorResponseSchema } from '../api-schema.js';
+import { successCartResponseSchema } from './cart.schema.js';
 
 export const cart = new Hono<{ Variables: Variables }>().basePath('/carts');
 

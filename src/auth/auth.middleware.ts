@@ -1,9 +1,9 @@
 import type { Context } from 'hono';
 import { getCookie } from 'hono/cookie';
-import { config } from '@/src/config.js';
-import { validateSession, verifySessionToken } from '@/src/auth/session.service.js';
-import { db } from '@/src/database.js';
-import { InvalidSessionError } from '@/src/error.js';
+import { config } from '../config.js';
+import { validateSession, verifySessionToken } from './session.service.js';
+import { db } from '../database.js';
+import { InvalidSessionError } from '../error.js';
 
 export async function authMiddleware(c: Context, next: () => Promise<void>) {
   const sessionToken = getCookie(c, config.sessionCookieName);

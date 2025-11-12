@@ -1,4 +1,4 @@
-import type { User } from '@/src/auth/user.entity.js';
+import type { User } from './user.entity.js';
 
 export type Variables = {
   user: User;

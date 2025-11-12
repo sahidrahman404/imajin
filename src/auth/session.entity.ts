@@ -1,6 +1,6 @@
 import { Entity, PrimaryKey, Property, ManyToOne } from '@mikro-orm/core';
-import { type User } from '../../src/auth/user.entity.js';
-import { User as UserEntity } from '../../src/auth/user.entity.js';
+import { type User } from './user.entity.js';
+import { User as UserEntity } from './user.entity.js';
 
 @Entity()
 export class Session {

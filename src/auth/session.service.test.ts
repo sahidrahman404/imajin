@@ -7,18 +7,16 @@ import {
   validateSession,
   deleteSessionsByUser,
   deleteExpiredSessions,
-} from '@/src/auth/session.service.js';
-import { User } from '@/src/auth/user.entity.js';
-import { Session } from '@/src/auth/session.entity.js';
-import { TsMorphMetadataProvider } from '@mikro-orm/reflection';
+} from './session.service.js';
+import { User } from './user.entity.js';
+import { Session } from './session.entity.js';
 import { MikroORM } from '@mikro-orm/core';
-import { BetterSqliteDriver } from '@mikro-orm/better-sqlite';
-import type { ORM } from '@/src/database.js';
-import { InvalidSessionError, ExpiredSessionError } from '@/src/error.js';
+import type { ORM } from '../database.js';
+import { InvalidSessionError, ExpiredSessionError } from '../error.js';
 import { hash } from '@node-rs/argon2';
-import config from '@/src/mikro-orm.config.js';
+import config from '../mikro-orm.config.js';
 
-vi.mock('@/src/config.js', () => ({
+vi.mock('../config.js', () => ({
   config: {
     sessionSecret: 'test-secret-key-for-testing',
   },

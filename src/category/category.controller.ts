@@ -1,11 +1,11 @@
 import { Hono } from 'hono';
-import type { Variables } from '@/src/auth/variable.js';
-import { authMiddleware } from '@/src/auth/auth.middleware.js';
-import { db } from '@/src/database.js';
-import { getAllCategories } from '@/src/category/category.service.js';
+import type { Variables } from '../auth/variable.js';
+import { authMiddleware } from '../auth/auth.middleware.js';
+import { db } from '../database.js';
+import { getAllCategories } from './category.service.js';
 import { describeRoute, resolver } from 'hono-openapi';
-import { successOrderSchema } from '@/src/order/order.schema.js';
-import { appErrorResponseSchema } from '@/src/api-schema.js';
+import { successOrderSchema } from '../order/order.schema.js';
+import { appErrorResponseSchema } from '../api-schema.js';
 import { z } from 'zod';
 
 export const category = new Hono<{ Variables: Variables }>().basePath('/categories');

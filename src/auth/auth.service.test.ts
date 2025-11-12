@@ -1,14 +1,14 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { verify } from '@node-rs/argon2';
-import { register, login } from '@/src/auth/auth.service.js';
-import { User } from '@/src/auth/user.entity.js';
-import { Session } from '@/src/auth/session.entity.js';
+import { register, login } from './auth.service.js';
+import { User } from './user.entity.js';
+import { Session } from './session.entity.js';
 import { MikroORM } from '@mikro-orm/core';
-import type { ORM } from '@/src/database.js';
-import { EmailConflictError, InvalidCredentialError } from '@/src/error.js';
-import config from '@/src/mikro-orm.config.js';
+import type { ORM } from '../database.js';
+import { EmailConflictError, InvalidCredentialError } from '../error.js';
+import config from '../mikro-orm.config.js';
 
-vi.mock('@/src/config.js', () => ({
+vi.mock('../config.js', () => ({
   config: {
     sessionSecret: 'test-secret-key-for-testing',
   },

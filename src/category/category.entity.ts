@@ -1,6 +1,6 @@
 import { Entity, PrimaryKey, Property, OneToMany, Collection } from '@mikro-orm/core';
-import { type Product } from '../../src/product/product.entity.js';
-import { Product as ProductEntity } from '../../src/product/product.entity.js';
+import { type Product } from '../product/product.entity.js';
+import { Product as ProductEntity } from '../product/product.entity.js';
 
 @Entity()
 export class Category {

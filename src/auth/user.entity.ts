@@ -1,10 +1,10 @@
 import { Entity, PrimaryKey, Property, OneToMany, Collection } from '@mikro-orm/core';
-import { type Session } from '../../src/auth/session.entity.js';
-import { type Cart } from '../../src/cart/cart.entity.js';
-import { type Order } from '../../src/order/order.entity.js';
-import { Session as SessionEntity } from '../../src/auth/session.entity.js';
-import { Cart as CartEntity } from '../../src/cart/cart.entity.js';
-import { Order as OrderEntity } from '../../src/order/order.entity.js';
+import { type Session } from './session.entity.js';
+import { type Cart } from '../cart/cart.entity.js';
+import { type Order } from '../order/order.entity.js';
+import { Session as SessionEntity } from './session.entity.js';
+import { Cart as CartEntity } from '../cart/cart.entity.js';
+import { Order as OrderEntity } from '../order/order.entity.js';
 
 @Entity()
 export class User {

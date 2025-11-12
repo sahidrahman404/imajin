@@ -1,8 +1,8 @@
 import { hash, verify } from '@node-rs/argon2';
-import { User } from '@/src/auth/user.entity.js';
-import { createSession } from '@/src/auth/session.service.js';
+import { User } from './user.entity.js';
+import { createSession } from './session.service.js';
 import { ConstraintViolationException, type EntityManager } from '@mikro-orm/core';
-import { EmailConflictError, InvalidCredentialError } from '@/src/error.js';
+import { EmailConflictError, InvalidCredentialError } from '../error.js';
 
 export interface RegisterData {
   email: string;

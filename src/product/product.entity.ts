@@ -1,7 +1,7 @@
 import { Entity, PrimaryKey, Property, ManyToOne, OneToMany, Collection } from '@mikro-orm/core';
-import { CartItem } from '../../src/cart/cart-item.entity.js';
-import { OrderItem } from '../../src/order/order-item.entity.js';
-import { Category } from '../../src/category/category.entity.js';
+import { CartItem } from '../cart/cart-item.entity.js';
+import { OrderItem } from '../order/order-item.entity.js';
+import { Category } from '../category/category.entity.js';
 
 @Entity()
 export class Product {

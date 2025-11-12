@@ -5,8 +5,8 @@ import type { Variables } from '../auth/variable.js';
 import { authMiddleware } from '../auth/auth.middleware.js';
 import { db } from '../database.js';
 import { createOrder, getOrderHistory, getOrderById } from './order.service.js';
-import { appErrorResponseSchema } from '@/src/api-schema.js';
-import { orderStatusSchema, successOrderSchema } from '@/src/order/order.schema.js';
+import { appErrorResponseSchema } from '../api-schema.js';
+import { orderStatusSchema, successOrderSchema } from './order.schema.js';
 
 export const order = new Hono<{ Variables: Variables }>().basePath('/orders');
 

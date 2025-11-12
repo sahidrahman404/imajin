@@ -1,11 +1,11 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import { MikroORM } from '@mikro-orm/core';
-import type { ORM } from '@/src/database.js';
-import { searchProducts } from '@/src/product/product.service.js';
-import { Product } from '@/src/product/product.entity.js';
-import { Category } from '@/src/category/category.entity.js';
-import { DatabaseSeeder } from '@/src/seeders/database.seeder.js';
-import config from '@/src/mikro-orm.config.js';
+import type { ORM } from '../database.js';
+import { searchProducts } from './product.service.js';
+import { Product } from './product.entity.js';
+import { Category } from '../category/category.entity.js';
+import { DatabaseSeeder } from '../seeders/database.seeder.js';
+import config from '../mikro-orm.config.js';
 
 describe('product service integration tests', () => {
   let orm: ORM;

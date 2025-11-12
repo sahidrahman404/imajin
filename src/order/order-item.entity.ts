@@ -1,8 +1,8 @@
 import { Entity, PrimaryKey, Property, ManyToOne } from '@mikro-orm/core';
-import { type Product } from '../../src/product/product.entity.js';
-import { Product as ProductEntity } from '../../src/product/product.entity.js';
-import { type Order } from '../../src/order/order.entity.js';
-import { Order as OrderEntity } from '../../src/order/order.entity.js';
+import { type Product } from '../product/product.entity.js';
+import { Product as ProductEntity } from '../product/product.entity.js';
+import { type Order } from './order.entity.js';
+import { Order as OrderEntity } from './order.entity.js';
 
 @Entity()
 export class OrderItem {

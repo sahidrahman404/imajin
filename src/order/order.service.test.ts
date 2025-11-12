@@ -1,22 +1,22 @@
 import { describe, it, expect, beforeAll, afterAll, beforeEach } from 'vitest';
 import { MikroORM } from '@mikro-orm/core';
-import type { ORM } from '@/src/database.js';
+import type { ORM } from '../database.js';
 import {
   createOrder,
   calculateOrderTotal,
   getOrderHistory,
   getOrderById,
-} from '@/src/order/order.service.js';
-import { Order, OrderStatus } from '@/src/order/order.entity.js';
-import { OrderItem } from '@/src/order/order-item.entity.js';
-import { Product } from '@/src/product/product.entity.js';
-import { User } from '@/src/auth/user.entity.js';
-import { Cart } from '@/src/cart/cart.entity.js';
-import { CartItem } from '@/src/cart/cart-item.entity.js';
-import { CartIsEmptyError, NoValidItemsSelectedError, OrderNotFoundError } from '@/src/error.js';
-import { addToCart } from '@/src/cart/cart.service.js';
-import { DatabaseSeeder } from '@/src/seeders/database.seeder.js';
-import config from '@/src/mikro-orm.config.js';
+} from './order.service.js';
+import { Order, OrderStatus } from './order.entity.js';
+import { OrderItem } from './order-item.entity.js';
+import { Product } from '../product/product.entity.js';
+import { User } from '../auth/user.entity.js';
+import { Cart } from '../cart/cart.entity.js';
+import { CartItem } from '../cart/cart-item.entity.js';
+import { CartIsEmptyError, NoValidItemsSelectedError, OrderNotFoundError } from '../error.js';
+import { addToCart } from '../cart/cart.service.js';
+import { DatabaseSeeder } from '../seeders/database.seeder.js';
+import config from '../mikro-orm.config.js';
 
 describe('order service integration tests', () => {
   let orm: ORM;

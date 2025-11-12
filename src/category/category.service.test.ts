@@ -1,10 +1,10 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import { MikroORM } from '@mikro-orm/core';
-import type { ORM } from '@/src/database.js';
-import { getAllCategories } from '@/src/category/category.service.js';
-import { Category } from '@/src/category/category.entity.js';
-import { DatabaseSeeder } from '@/src/seeders/database.seeder.js';
-import config from '@/src/mikro-orm.config.js';
+import type { ORM } from '../database.js';
+import { getAllCategories } from './category.service.js';
+import { Category } from './category.entity.js';
+import { DatabaseSeeder } from '../seeders/database.seeder.js';
+import config from '../mikro-orm.config.js';
 
 describe('category service integration tests', () => {
   let orm: ORM;

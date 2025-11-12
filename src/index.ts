@@ -1,18 +1,18 @@
 import { serve } from '@hono/node-server';
 import { Hono } from 'hono';
 import { HTTPException } from 'hono/http-exception';
-import { auth } from '@/src/auth/auth.controller.js';
-import { AppError, EmailConflictError } from '@/src/error.js';
+import { auth } from './auth/auth.controller.js';
+import { AppError, EmailConflictError } from './error.js';
 import { RequestContext } from '@mikro-orm/core';
-import { db } from '@/src/database.js';
-import { product } from '@/src/product/product.controller.js';
-import { category } from '@/src/category/category.controller.js';
-import { cart } from '@/src/cart/cart.controller.js';
-import { order } from '@/src/order/order.controller.js';
+import { db } from './database.js';
+import { product } from './product/product.controller.js';
+import { category } from './category/category.controller.js';
+import { cart } from './cart/cart.controller.js';
+import { order } from './order/order.controller.js';
 import { openAPIRouteHandler } from 'hono-openapi';
 import { Scalar } from '@scalar/hono-api-reference';
 import { cors } from 'hono/cors';
-import { config } from '@/src/config.js';
+import { config } from './config.js';
 
 const app = new Hono().basePath('/api/v1');
 

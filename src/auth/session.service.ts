@@ -1,9 +1,9 @@
 import { createHmac, randomBytes, timingSafeEqual } from 'node:crypto';
-import { config } from '@/src/config.js';
-import { User } from '@/src/auth/user.entity.js';
-import { Session } from '@/src/auth/session.entity.js';
+import { config } from '../config.js';
+import { User } from './user.entity.js';
+import { Session } from './session.entity.js';
 import { EntityManager } from '@mikro-orm/core';
-import { ExpiredSessionError, InvalidSessionError } from '@/src/error.js';
+import { ExpiredSessionError, InvalidSessionError } from '../error.js';
 
 export async function createSession(user: User, em: EntityManager) {
   const session = new Session();

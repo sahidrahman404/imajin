@@ -1,4 +1,4 @@
-import { Product } from '@/src/product/product.entity.js';
+import { Product } from './product.entity.js';
 import type { EntityManager } from '@mikro-orm/core';
 
 export interface ProductFilters {

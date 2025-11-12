@@ -10,17 +10,18 @@
     ],
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
-    "outDir": "./dist",
+    "outDir": "dist",
     "experimentalDecorators": true,
+    "declaration": true,
     "emitDecoratorMetadata": true,
     "esModuleInterop": true,
-    "paths": {
-      "@/*": ["./*"]
-    }
   },
   "ts-node": {
     "esm": true,
     "transpileOnly": true
   },
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "include": [
+    "./src/**/*.ts"
+  ]
 }

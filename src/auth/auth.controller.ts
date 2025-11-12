@@ -1,14 +1,14 @@
 import { Hono } from 'hono';
 import { z } from 'zod';
-import { login, register } from '@/src/auth/auth.service.js';
+import { login, register } from './auth.service.js';
 import { deleteCookie, setCookie } from 'hono/cookie';
 import { describeRoute, resolver, validator } from 'hono-openapi';
-import { db } from '@/src/database.js';
-import { config } from '@/src/config.js';
-import { authMiddleware } from '@/src/auth/auth.middleware.js';
-import type { Variables } from '@/src/auth/variable.js';
-import { deleteSessionsByUser } from '@/src/auth/session.service.js';
-import { badRequestResponseSchema, appErrorResponseSchema } from '@/src/api-schema.js';
+import { db } from '../database.js';
+import { config } from '../config.js';
+import { authMiddleware } from './auth.middleware.js';
+import type { Variables } from './variable.js';
+import { deleteSessionsByUser } from './session.service.js';
+import { badRequestResponseSchema, appErrorResponseSchema } from '../api-schema.js';
 
 export const auth = new Hono<{ Variables: Variables }>().basePath('');
 

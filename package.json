@@ -1,0 +1,40 @@
+{
+  "name": "imajin-marketplace",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "start": "node dist/index.js",
+    "test": "vitest",
+    "migration:create": "mikro-orm-esm migration:create",
+    "migration:up": "mikro-orm-esm migration:up",
+    "migration:down": "mikro-orm-esm migration:down",
+    "migration:cache": "mikro-orm-esm cache:generate",
+    "seed": "mikro-orm-esm seeder:run"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^10.1.0",
+    "@hono/node-server": "^1.19.6",
+    "@hono/standard-validator": "^0.1.5",
+    "@mikro-orm/better-sqlite": "^6.5.9",
+    "@mikro-orm/core": "^6.5.9",
+    "@mikro-orm/migrations": "^6.5.9",
+    "@mikro-orm/reflection": "^6.5.9",
+    "@mikro-orm/seeder": "^6.5.9",
+    "@node-rs/argon2": "^2.0.2",
+    "hono": "^4.10.4",
+    "hono-openapi": "^1.1.1",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@mikro-orm/cli": "^6.5.9",
+    "@types/node": "^20.11.17",
+    "prettier": "^3.6.2",
+    "ts-node": "^10.9.2",
+    "tsc": "^2.0.4",
+    "tsx": "^4.7.1",
+    "typescript": "^5.8.3",
+    "vitest": "^4.0.8"
+  }
+}

@@ -3,4 +3,5 @@ export const config = {
   sessionCookieName: process.env.SESSION_COOKIE_NAME || 'sid',
   frontendUrl: process.env.FRONTEND_URL || 'http://localhost:3001',
   nodeEnv: process.env.NODE_ENV || 'development',
+  dbName: process.env.DB_NAME || 'sqlite.db',
 };

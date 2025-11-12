@@ -10,13 +10,14 @@ import { Product } from './product/product.entity.js';
 import { Category } from './category/category.entity.js';
 import { Order } from './order/order.entity.js';
 import { OrderItem } from './order/order-item.entity.js';
+import { config as configEnv } from './config.js';
 
 const config: Options = {
   driver: BetterSqliteDriver,
-  dbName: 'sqlite.db',
+  dbName: configEnv.dbName,
   entities: [User, Session, Cart, CartItem, Product, Category, Order, OrderItem],
   metadataProvider: TsMorphMetadataProvider,
-  debug: true,
+  debug: configEnv.nodeEnv !== 'production',
   extensions: [Migrator, SeedManager],
   seeder: {
     path: 'dist/seeders',
